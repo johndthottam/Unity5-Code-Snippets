@@ -1,0 +1,33 @@
+//***********************************************************//
+// Version v.1.0     
+// Change color of an object
+//
+// Control a gameobject movement by assigned movement keys
+// Add to a gameobject to be controlled
+//***********************************************************//
+
+using UnityEngine;
+using System.Collections;
+
+public class cubemover : MonoBehaviour
+{
+
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        transform.Translate(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+
+        if (Input.GetKeyDown("r"))
+        {
+            print("reset key was pressed");
+            transform.position = new Vector3(0, 1, 0);
+        }
+    }
+}
