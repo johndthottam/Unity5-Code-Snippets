@@ -1,0 +1,92 @@
+//***************************************************************//
+//Version v.1.0                                                  //
+//Script to toggle on and off tv                                 //
+//Collision Detection : Yes || set as trigger                    //
+//Sound : Yes || Attached audio left & right component           //
+//Key detection : Yes                                            //
+//Interactivity : Yes                                            //
+//***************************************************************//
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Rendering;
+
+public class tv_toggle : MonoBehaviour
+{
+
+    [Tooltip("Attach the left audio channel")]
+    public AudioSource LeftAudio; // Audio to be played from left speaker
+    [Tooltip("Attach the right audio channel")]
+    public AudioSource RightAudio;// Audio to be played from right speaker
+    [Tooltip("Attach the notification text canvas")]
+    public GameObject TextPopup;  //contains text notification
+
+    private bool IsCollided; // collision checker
+    private int IsPressed;   // keypress checker
+
+    void Start()
+    {
+        TextPopup.SetActive(false);
+        IsCollided = false;
+        IsPressed = 0;
+    }
+
+    void Update()
+    {
+        if (IsCollided == true) // collision checker
+        { 
+            TextPopup.SetActive(true);
+
+            if (Input.GetKeyDown(KeyCode.F)) //key checker
+            {
+                IsPressed = IsPressed + 1;
+                switch (IsPressed)
+                {
+                    #region movie play , pause, off cases
+                    case 1:
+
+                        GetComponent<Renderer>().enabled = true;
+                        Renderer r = GetComponent<Renderer>();
+                        MovieTexture movie = (MovieTexture)r.material.mainTexture;
+                        movie.Play();
+                        RightAudio.Play();
+                        LeftAudio.Play();
+                        print("play");
+                        break;
+
+                    case 2:
+
+                        Renderer s = GetComponent<Renderer>();
+                        MovieTexture movi = (MovieTexture)s.material.mainTexture;
+                        movi.Pause();
+                        RightAudio.Pause();
+                        LeftAudio.Pause();
+                        print("pause");
+                        break;
+
+                    case 3:
+
+                        GetComponent<Renderer>().enabled = false;
+                        IsPressed = 0;
+                        break;
+                        #endregion
+                }
+            }
+        }
+    }
+
+
+
+    //trigger actions	
+    void OnTriggerExit(Collider other)
+    {
+        IsCollided = false;
+        TextPopup.SetActive(false);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        IsCollided = true;
+    }
+}
