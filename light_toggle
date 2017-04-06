@@ -1,0 +1,76 @@
+//***************************************************************//
+//Version v.1.0                                                  //
+//Script for toggle on and off light in a lampshade              //
+//Collision Detection : Yes || set as trigger                    //
+//Sound : Yes || Attached audio component                        //
+//Key detection : Yes                                            //
+//Interactivity : Yes                                            //
+//***************************************************************//
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Rendering;
+
+public class light_toggle : MonoBehaviour
+{
+
+    [Tooltip("Attach light component here")]
+    public Light togglelight;           // light source
+    [Tooltip("Attach object which glows emissively when lamp is on")]
+    public GameObject lampGlowMaterial; //illuminated by light object , its emissive value will change to reflect on and off lamp appearence 
+    [Tooltip("Attach the notification text canvas")]
+    public GameObject TextPopup;       //contains text notification
+
+    private bool IsCollided;          // collision checker   
+    private bool IsPressed;           // keypress checker
+    private Color DefaultEmmisive;    // contains default diffuse value
+
+    void Start()
+    {
+        IsCollided = false;
+        togglelight.enabled = IsPressed;
+        DefaultEmmisive = lampGlowMaterial.GetComponent<Renderer>().material.GetColor("_EmissionColor"); // get the default emmisive value from object
+        TextPopup.SetActive(false);
+    }
+
+    void Update()
+    {
+        if (IsCollided == true)     // collision checker
+        {
+            #region Collision mechanism
+            TextPopup.SetActive(true);
+
+            if (Input.GetKeyDown(KeyCode.F))
+            { //key checker
+                IsPressed = !IsPressed;
+                GetComponent<AudioSource>().Play();
+            }
+
+            if (IsPressed)
+            {
+                togglelight.enabled = true;
+                lampGlowMaterial.GetComponent<Renderer>().material.SetColor("_EmissionColor", DefaultEmmisive);
+            }
+            else if (!IsPressed)
+            {
+                lampGlowMaterial.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
+                togglelight.enabled = false;
+            }
+            #endregion
+        }
+
+    }
+
+    //trigger actions	
+    void OnTriggerExit(Collider other)
+    {
+        IsCollided = false;
+        TextPopup.SetActive(false);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        IsCollided = true;
+    }
+}
