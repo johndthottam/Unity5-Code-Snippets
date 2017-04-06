@@ -1,0 +1,38 @@
+/***********************************************************//
+//Version v.1.0     
+//Change material of object on mouse Entry and Exit  
+//
+//***********************************************************//
+
+using UnityEngine;
+using System.Collections;
+
+public class outline : MonoBehaviour
+{
+
+    private Material primary;  // default material
+    public Material secondary; // assign the material
+
+    // Use this for initialization
+    void Start()
+    {
+        gameObject.GetComponent<Renderer>().material = primary; //acquire the default material of the object
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    void OnMouseEnter()
+    {
+        gameObject.GetComponent<Renderer>().material = secondary; 
+    }
+
+    void OnMouseExit()
+    {
+        gameObject.GetComponent<Renderer>().material = primary;
+    }
+
+}
