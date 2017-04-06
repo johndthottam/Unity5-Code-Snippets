@@ -1,0 +1,42 @@
+//***********************************************************//
+//Version v.1.0     
+//Sample Menu code
+//
+//***********************************************************//
+
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using UnityEngine.SceneManagement;
+
+public class menu : MonoBehaviour
+{
+
+    public Canvas mainmenu;
+    public Canvas optionscanvas;
+
+    void awake()
+    {
+        optionscanvas.enabled = false;
+        //mainmenu.enabled = false;
+    }
+
+    public void OptionsOn()
+    {
+        mainmenu.enabled = false;
+        optionscanvas.enabled = true;
+    }
+
+    public void ReturnOn()
+    {
+        mainmenu.enabled = true;
+        optionscanvas.enabled = false;
+    }
+
+    public void LoadOn()
+    {
+        //Application.LoadLevel ("hh");
+        SceneManager.LoadScene(1);
+    }
+    // Use this for initialization
+}
