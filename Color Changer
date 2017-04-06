@@ -1,0 +1,43 @@
+//***********************************************************//
+//Version v.1.0     
+//Change color of an object
+//Make seperate files for part 1 and part2
+//***********************************************************//
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~PART 1~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//Add to a gameobject in scene
+using UnityEngine;
+using System.Collections.Generic;
+public class DynamicColorObject : MonoBehaviour
+{
+    public static List<GameObject> list = new List<GameObject>(); //add gameobjects
+    void Start()
+    {
+        list.Add(gameObject);
+    }
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~PART 2~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//Colorchanger , make seperate code file
+// add to button/ui interactions and call function via event handler
+using UnityEngine;
+using System.Collections;
+
+public class ColorChanger : MonoBehaviour
+{
+    public void changeColor()
+    {
+        foreach (GameObject dynamicColorObject in DynamicColorObject.list)
+        {
+            dynamicColorObject.GetComponent<Renderer>().sharedMaterial.color = Color.red;  
+        }
+    }
+    public void changeColor2()
+    {
+        foreach (GameObject dynamicColorObject in DynamicColorObject.list)
+        {
+            dynamicColorObject.GetComponent<Renderer>().sharedMaterial.color = Color.green;
+        }
+    }
+}
