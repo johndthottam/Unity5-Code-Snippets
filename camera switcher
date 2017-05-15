@@ -1,0 +1,42 @@
+// script to switch between two camera
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class camera_manager : MonoBehaviour
+{
+    [AddComponentMenu("Camera Manager")]
+    // Use this for initialization
+    [Header("Attach non-fps camera here.")]
+    [Tooltip("Attach exterior rotation camera here !")]
+    public Camera cam1;
+
+    [Header("Attach FPS Character here.")]
+    [Tooltip("Attach FPS character here !")]
+    public GameObject cam2; // use thios to attach FPS kind of camera component
+    //public Camera cam1  // use this to attach specific camera gameobject
+
+    void Start()
+    {
+        cam2.active = false;   // used active because its a game object
+        cam1.enabled = true;   // used enable to access the enable property of camera
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        if (Input.GetKeyDown(KeyCode.Q)) // use any input method you like
+        {
+            print("Q press"); // print a log
+            cam1.enabled = !cam1.enabled;
+            cam2.active = !cam2.active;
+        }
+       if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) // to detect touch in touch devices
+        {
+            print("touched"); // print a log
+            cam1.enabled = !cam1.enabled;
+            cam2.active = !cam2.active;
+        }
+    }
+}
