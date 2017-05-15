@@ -1,0 +1,58 @@
+/***********************************************************//
+//Version v.1.0     
+//Loading UI animations
+//Real time update of progress bar and text 
+//***********************************************************//
+
+using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+public class loader : MonoBehaviour
+{
+    public Image LoadingBar; //gameobject with loading bar or radial graphics
+    public Text Loadedpercent; //UI text componend to display the % loaded value
+    private AsyncOperation async;
+
+    private string loadProgress = "Loading...";
+    // Use this for initialization
+    void Start()
+    {
+        StartCoroutine(LoadRoutine());
+    }
+
+    private string lastLoadProgress = null;
+    private IEnumerator LoadRoutine()
+    {
+        AsyncOperation op = SceneManager.LoadSceneAsync(1);
+        op.allowSceneActivation = false;
+        while (!op.isDone)
+        {
+            LoadingBar.fillAmount = op.progress; // update progressbar
+            if (op.progress < 0.9f)
+            {
+                loadProgress = "Loading: " + (op.progress * 100f).ToString("F0") + "%";
+                Loadedpercent.text = (op.progress * 100f).ToString("F0") + "%"; //update text realtime
+            }
+            else // if progress >= 0.9f the scene is loaded and is ready to activate.
+            {
+                if (Input.anyKeyDown)
+                {
+                    op.allowSceneActivation = true;
+                }
+                loadProgress = "Loading ready for activation, Press any key to continue";
+
+                LoadingBar.fillAmount = 1f;   //done coz the value ranges from 0f to 0.9f , but the value should be 1f for the radial to look complete.
+                Loadedpercent.text =  "100%"; //done coz the value ranges from 0f to 0.9f , but the value should be 1f for the text to look complete.
+            }
+           
+            if (lastLoadProgress != loadProgress) {
+                lastLoadProgress = loadProgress; Debug.Log(loadProgress);
+            } // Don't spam console.
+            yield return null;
+        }
+        loadProgress = "Load complete.";
+        Debug.Log(loadProgress);
+    }
+}
