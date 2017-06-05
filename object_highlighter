@@ -1,5 +1,16 @@
-//Villa highlight manager
-//Attach this script to empty game object
+//***********************************************************//
+//Villa highlight manager 
+//Version v.1.0     
+// Highlight Overlay object over a gameobject to get a shield like effect
+//
+// Input 
+//   Attach objects to respective villa arrays
+// Output
+//   On button events , attached object gets toggeled.
+// WARNING
+//  Set material rendering mode to fade
+//***********************************************************//
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
