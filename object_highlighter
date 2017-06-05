@@ -17,21 +17,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class villa_highlighter : MonoBehaviour {
+public class villa_highlighter : MonoBehaviour
+{
 
     //Object to be highlighted
 
     //Villa Type 1
+    [Header("Villa Type 1")]
     [Tooltip("Attach villa type 1 east highlight box")]
     public GameObject[] villaType1_east; //villa type 1
     [Tooltip("Attach villa type 1 west highlight box")]
     public GameObject[] villaType1_west; //villa type 1
     //Villa Type 2
+    [Header("Villa Type 2")]
     [Tooltip("Attach villa type 2 east highlight box")]
     public GameObject[] villaType2_east; //villa type 2
     [Tooltip("Attach villa type 2 west highlight box")]
     public GameObject[] villaType2_west; //villa type 2
     //Villa Type 3
+    [Header("Villa Type 3")]
     [Tooltip("Attach villa type 3 east highlight box")]
     public GameObject[] villaType3_east; //villa type 3
     [Tooltip("Attach villa type 3 west highlight box")]
@@ -49,7 +53,7 @@ public class villa_highlighter : MonoBehaviour {
     public Button btn_villa3_east;  //UI button
     public Button btn_villa3_west;  //UI button
 
-    private Color tempcolor; 
+    private Color tempcolor;
 
     //get boolean status of button. Pressed or not pressed.
     private bool btn_1_toggle; //button toggle
@@ -67,7 +71,8 @@ public class villa_highlighter : MonoBehaviour {
     private bool temp6;
 
 
-    void Start () {
+    void Start()
+    {
 
         /***************VILLA 1 east Button action***************/
         Button btn1 = btn_villa1_east.GetComponent<Button>();
@@ -120,16 +125,18 @@ public class villa_highlighter : MonoBehaviour {
         }
     }
 
-// Update is called once per frame
-void Update () {
-       // btn_1_toggle = !btn_1_toggle;
+    // Update is called once per frame
+    void Update()
+    {
+        // btn_1_toggle = !btn_1_toggle;
     }
 
     //Actions for villa 1 east on UI event
     void btn_villa1_east_task()
     {
-           temp1 = true;
-        if (temp1 == true) {
+        temp1 = true;
+        if (temp1 == true)
+        {
             foreach (GameObject villa_box1 in villaType1_east)
             {
                 villa_box1.active = true;
