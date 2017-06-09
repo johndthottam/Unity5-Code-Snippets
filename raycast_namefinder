@@ -8,27 +8,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class raycaster : MonoBehaviour {
-
-    private RaycastHit hit;
-    private bool sample;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+public class rayemitter : MonoBehaviour
+{
+    public string hitter_name;
     void FixedUpdate()
     {
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        sample = Physics.Raycast(transform.position, fwd, out hit, 10);
-        if (Input.GetMouseButtonDown(0))
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit = new RaycastHit();
+        if (Input.GetMouseButton(0))
         {
-            print(hit.collider.name);
+            if (Physics.Raycast(ray, out hit))
+            {
+                hitter_name = hit.collider.name;
+                print(hitter_name);
+            }
         }
     }
-}
+
+} 
