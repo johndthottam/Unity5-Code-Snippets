@@ -1,0 +1,350 @@
+//***********************************************************//
+//Villa highlight manager 
+//Version v.1.0     
+// Highlight Overlay object over a gameobject to get a shield like effect
+//
+// Input 
+//   Attach objects to respective villa arrays
+// Output
+//   On button events , attached object gets toggeled.
+//
+// WARNING
+//  Set material rendering mode to fade
+//***********************************************************//
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using System;
+
+public class villa_highlighter : MonoBehaviour
+{
+
+    //Object to be highlighted
+    // public UI.ToggleGroup group;
+
+    //public ToggleGroup toggle_group;
+   // public Toggle toggler1;
+
+    //Villa Type 1
+    [Header("Villa Type 1")]
+    [Tooltip("Attach villa type 1 east highlight box")]
+    public GameObject[] villaType1_east; //villa type 1
+    [Tooltip("Attach villa type 1 west highlight box")]
+    public GameObject[] villaType1_west; //villa type 1
+
+  //  //Villa Type 2
+  //  [Header("Villa Type 2")]
+  //  [Tooltip("Attach villa type 2 east highlight box")]
+  //  public GameObject[] villaType2_east; //villa type 2
+  //  [Tooltip("Attach villa type 2 west highlight box")]
+  //  public GameObject[] villaType2_west; //villa type 2
+
+  //  //Villa Type 3
+  //  [Header("Villa Type 3")]
+  //  [Tooltip("Attach villa type 3 east highlight box")]
+  //  public GameObject[] villaType3_east; //villa type 3
+  //  [Tooltip("Attach villa type 3 west highlight box")]
+  //  public GameObject[] villaType3_west; //villa type 3
+
+  //  //Buttons or interaction points
+  //  [Header("Attach Inputs")]
+  //  //Villa Type 1
+  //  public Button btn_villa1_east;  //UI button
+  //  public Button btn_villa1_west;  //UI button
+  //  //Villa Type 2
+  //  public Button btn_villa2_east;  //UI button
+  //  public Button btn_villa2_west;  //UI button
+  //  //Villa Type 3
+  //  public Button btn_villa3_east;  //UI button
+  //  public Button btn_villa3_west;  //UI button
+
+    private Color tempcolor;
+
+    //get boolean status of button. Highlighter internal usage.
+    private bool btn_1_toggle; //button toggle
+    private bool btn_2_toggle; //button toggle
+    private bool btn_3_toggle; //button toggle
+    private bool btn_4_toggle; //button toggle
+    private bool btn_5_toggle; //button toggle
+    private bool btn_6_toggle; //button toggle
+
+    //highligter internal usage bools
+    private bool temp1;
+    private bool temp2;
+    private bool temp3;
+    private bool temp4;
+    private bool temp5;
+    private bool temp6;
+
+    void Start()
+    {
+
+    //    /***************VILLA 1 east Button action***************/
+    //    Button btn1 = btn_villa1_east.GetComponent<Button>();
+    //    btn1.onClick.AddListener(btn_villa1_east_task);
+    //
+    //    /***************VILLA 2 east Button action***************/
+    //    Button btn2 = btn_villa2_east.GetComponent<Button>();
+    //    btn2.onClick.AddListener(btn_villa2_east_task);
+    //
+    //    /***************VILLA 3 east Button action***************/
+    //    Button btn3 = btn_villa3_east.GetComponent<Button>();
+    //    btn3.onClick.AddListener(btn_villa3_east_task);
+    //
+    //    /***************VILLA 1 west Button action***************/
+    //    Button btn4 = btn_villa1_west.GetComponent<Button>();
+    //    btn4.onClick.AddListener(btn_villa1_west_task);
+    //
+    //    /***************VILLA 2 west Button action***************/
+    //    Button btn5 = btn_villa2_west.GetComponent<Button>();
+    //    btn5.onClick.AddListener(btn_villa2_west_task);
+    //
+    //    /***************VILLA 3 west Button action***************/
+    //    Button btn6 = btn_villa3_west.GetComponent<Button>();
+    //    btn6.onClick.AddListener(btn_villa3_west_task);
+
+        //disabling villa hightlight box on start
+        foreach (GameObject villa_box1 in villaType1_east)
+        {
+            villa_box1.active = false;
+        }
+     //   foreach (GameObject villa_box2 in villaType2_east)
+     //   {
+     //       villa_box2.active = false;
+     //   }
+     //   foreach (GameObject villa_box3 in villaType3_east)
+     //   {
+     //       villa_box3.active = false;
+     //   }
+        foreach (GameObject villa_box4 in villaType1_west)
+        {
+            villa_box4.active = false;
+        }
+     //   foreach (GameObject villa_box5 in villaType2_west)
+     //   {
+     //       villa_box5.active = false;
+     //   }
+     //   foreach (GameObject villa_box6 in villaType3_west)
+     //   {
+     //       villa_box6.active = false;
+     //   }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+  
+    }
+
+    //Actions for villa 1 east on UI event
+    public void btn_villa1_east_task()
+    {
+        temp1 = true;
+        if (temp1 == true)
+        {
+            foreach (GameObject villa_box1 in villaType1_east)
+            {
+                villa_box1.active = true;
+            }
+        }
+
+        if (btn_1_toggle == true && temp1 == true)
+        {
+            foreach (GameObject villa_box1 in villaType1_east)
+            {
+                tempcolor = villa_box1.GetComponent<MeshRenderer>().material.color;
+                tempcolor.a = 0f;
+                villa_box1.GetComponent<MeshRenderer>().material.color = tempcolor;
+            }
+            btn_1_toggle = !btn_1_toggle;
+        }
+        else
+        {
+            foreach (GameObject villa_box1 in villaType1_east)
+            {
+                tempcolor = villa_box1.GetComponent<MeshRenderer>().material.color;
+                tempcolor.a = 0.6f;
+                villa_box1.GetComponent<MeshRenderer>().material.color = tempcolor;
+            }
+            btn_1_toggle = !btn_1_toggle;
+        }
+    }
+
+    //Actions for villa 2 east on UI event
+  //  void btn_villa2_east_task()
+  //  {
+  //      temp2 = true;
+  //      if (temp2 == true)
+  //      {
+  //          foreach (GameObject villa_box2 in villaType2_east)
+  //          {
+  //              villa_box2.active = true;
+  //          }
+  //      }
+  //
+  //
+  //
+  //      if (btn_2_toggle == true && temp2 == true)
+  //      {
+  //          foreach (GameObject villa_box2 in villaType2_east)
+  //          {
+  //              tempcolor = villa_box2.GetComponent<MeshRenderer>().material.color;
+  //              tempcolor.a = 0f;
+  //              villa_box2.GetComponent<MeshRenderer>().material.color = tempcolor;
+  //          }
+  //          btn_2_toggle = !btn_2_toggle;
+  //      }
+  //      else
+  //      {
+  //          foreach (GameObject villa_box2 in villaType2_east)
+  //          {
+  //              tempcolor = villa_box2.GetComponent<MeshRenderer>().material.color;
+  //              tempcolor.a = 0.6f;
+  //              villa_box2.GetComponent<MeshRenderer>().material.color = tempcolor;
+  //          }
+  //          btn_2_toggle = !btn_2_toggle;
+  //      }
+  //  }
+  //
+  //  //Actions for villa 3 east on UI event
+  //  void btn_villa3_east_task()
+  //  {
+  //      temp3 = true;
+  //      if (temp3 == true)
+  //      {
+  //          foreach (GameObject villa_box3 in villaType3_east)
+  //          {
+  //              villa_box3.active = true;
+  //          }
+  //      }
+  //
+  //
+  //      if (btn_3_toggle == true && temp3 == true)
+  //      {
+  //          foreach (GameObject villa_box3 in villaType3_east)
+  //          {
+  //              tempcolor = villa_box3.GetComponent<MeshRenderer>().material.color;
+  //              tempcolor.a = 0f;
+  //              villa_box3.GetComponent<MeshRenderer>().material.color = tempcolor;
+  //          }
+  //          btn_3_toggle = !btn_3_toggle;
+  //      }
+  //      else
+  //      {
+  //          foreach (GameObject villa_box3 in villaType3_east)
+  //          {
+  //              tempcolor = villa_box3.GetComponent<MeshRenderer>().material.color;
+  //              tempcolor.a = 0.6f;
+  //              villa_box3.GetComponent<MeshRenderer>().material.color = tempcolor;
+  //          }
+  //          btn_3_toggle = !btn_3_toggle;
+  //      }
+  //  }
+  //
+  //  //Actions for villa 3_west on UI event
+  //  void btn_villa3_west_task()
+  //  {
+  //      temp4 = true;
+  //      if (temp4 == true)
+  //      {
+  //          foreach (GameObject villa_box4 in villaType3_west)
+  //          {
+  //              villa_box4.active = true;
+  //          }
+  //      }
+  //
+  //
+  //      if (btn_4_toggle == true && temp4 == true)
+  //      {
+  //          foreach (GameObject villa_box4 in villaType3_west)
+  //          {
+  //              tempcolor = villa_box4.GetComponent<MeshRenderer>().material.color;
+  //              tempcolor.a = 0f;
+  //              villa_box4.GetComponent<MeshRenderer>().material.color = tempcolor;
+  //          }
+  //          btn_4_toggle = !btn_4_toggle;
+  //      }
+  //      else
+  //      {
+  //          foreach (GameObject villa_box4 in villaType3_west)
+  //          {
+  //              tempcolor = villa_box4.GetComponent<MeshRenderer>().material.color;
+  //              tempcolor.a = 0.6f;
+  //              villa_box4.GetComponent<MeshRenderer>().material.color = tempcolor;
+  //          }
+  //          btn_4_toggle = !btn_4_toggle;
+  //      }
+  //  }
+  //
+  //  //Actions for villa 2_west on UI event
+  //  void btn_villa2_west_task()
+  //  {
+  //      temp5 = true;
+  //      if (temp5 == true)
+  //      {
+  //          foreach (GameObject villa_box5 in villaType2_west)
+  //          {
+  //              villa_box5.active = true;
+  //          }
+  //      }
+  //
+  //
+  //      if (btn_5_toggle == true && temp5 == true)
+  //      {
+  //          foreach (GameObject villa_box5 in villaType2_west)
+  //          {
+  //              tempcolor = villa_box5.GetComponent<MeshRenderer>().material.color;
+  //              tempcolor.a = 0f;
+  //              villa_box5.GetComponent<MeshRenderer>().material.color = tempcolor;
+  //          }
+  //          btn_5_toggle = !btn_5_toggle;
+  //      }
+  //      else
+  //      {
+  //          foreach (GameObject villa_box5 in villaType2_west)
+  //          {
+  //              tempcolor = villa_box5.GetComponent<MeshRenderer>().material.color;
+  //              tempcolor.a = 0.6f;
+  //              villa_box5.GetComponent<MeshRenderer>().material.color = tempcolor;
+  //          }
+  //          btn_5_toggle = !btn_5_toggle;
+  //      }
+  //  }
+  //
+    //Actions for villa 1_west on UI event
+    public void btn_villa1_west_task()
+    {
+        temp6 = true;
+        if (temp6 == true)
+        {
+            foreach (GameObject villa_box6 in villaType1_west)
+            {
+                villa_box6.active = true;
+            }
+        }
+  
+  
+        if (btn_6_toggle == true && temp6 == true)
+        {
+            foreach (GameObject villa_box6 in villaType1_west)
+            {
+                tempcolor = villa_box6.GetComponent<MeshRenderer>().material.color;
+                tempcolor.a = 0f;
+                villa_box6.GetComponent<MeshRenderer>().material.color = tempcolor;
+            }
+            btn_6_toggle = !btn_6_toggle;
+        }
+        else
+        {
+            foreach (GameObject villa_box6 in villaType1_west)
+            {
+                tempcolor = villa_box6.GetComponent<MeshRenderer>().material.color;
+                tempcolor.a = 0.6f;
+                villa_box6.GetComponent<MeshRenderer>().material.color = tempcolor;
+            }
+            btn_6_toggle = !btn_6_toggle;
+        }
+    }
+}
