@@ -1,0 +1,26 @@
+//***********************************************************//
+//Version v.1.0     
+//Solution for UI inputs affecting underlying gameobjects
+//Make seperate files for part 1 and part2
+//***********************************************************//
+
+
+using UnityEngine;
+
+
+public class class_name : MonoBehaviour
+{
+	void Start()
+    {
+       // uitoggle.SetActive(false);
+    }
+
+	void Update()
+    {
+		// 0 for Touch Input , 1 for Mouse Input
+		if (!EventSystem.current.IsPointerOverGameObject(0))  //check for detecting the input received
+		{ 
+		 // your code here
+		}
+	}
+}
